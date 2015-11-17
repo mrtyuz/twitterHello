@@ -1,5 +1,6 @@
 package com.twitter.controller;
 
+import com.twitter.dao.CategoryDao;
 import com.twitter.service.Model;
 import com.twitter.service.TwitterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class HelloController {
     @Autowired
     TwitterService twitterService;
 
+    @Autowired
+    CategoryDao categoryDao;
+
     @RequestMapping(value = "hello", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -36,4 +40,14 @@ public class HelloController {
         Integer percent = twitterService.getPercent(username1, username2, limit);
         return percent;
     }
+
+
+    @RequestMapping(value = "getPerson", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Integer twitter() {
+        return categoryDao.list().size();
+    }
+
+
 }
